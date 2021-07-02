@@ -4,10 +4,11 @@ project(st_handeye)
 add_compile_options(-std=c++11)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake")
 
-find_package(G2O REQUIRED)
 find_package(VISP REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(G2O REQUIRED)
+#find_package(g2o REQUIRED)
 find_package(Boost REQUIRED filesystem program_options)
 
 include_directories(
@@ -26,7 +27,7 @@ link_directories(${G2O_LIBRARY_DIRS})
 ###########
 
 add_library(st_handeye_graph
-  src/st_handeye_graph.cpp
+  ../src/st_handeye_graph.cpp
 )
 target_link_libraries(st_handeye_graph
   ${Boost_LIBRARIES}
@@ -42,7 +43,7 @@ target_link_libraries(st_handeye_graph
 )
 
 add_library(st_handeye_graph_xray
-  src/st_handeye_graph_xray.cpp
+  ../src/st_handeye_graph_xray.cpp
 )
 target_link_libraries(st_handeye_graph_xray
   ${Boost_LIBRARIES}
@@ -58,7 +59,7 @@ target_link_libraries(st_handeye_graph_xray
 )
 
 add_library(st_handeye_visp
-  src/st_handeye_visp.cpp
+  ../src/st_handeye_visp.cpp
 )
 target_link_libraries(st_handeye_visp
   ${Boost_LIBRARIES}
@@ -68,7 +69,7 @@ target_link_libraries(st_handeye_visp
 
 # handeye_simulation
 add_executable(handeye_simulation
-  src/handeye_simulation.cpp
+  ../src/handeye_simulation.cpp
 )
 target_link_libraries(handeye_simulation
   st_handeye_graph
@@ -81,7 +82,7 @@ add_dependencies(handeye_simulation
 
 # handeye_simulation_xray
 add_executable(handeye_simulation_xray
-  src/handeye_simulation_xray.cpp
+  ../src/handeye_simulation_xray.cpp
 )
 target_link_libraries(handeye_simulation_xray
     st_handeye_graph_xray
@@ -92,7 +93,7 @@ add_dependencies(handeye_simulation_xray
 
 # calibrate
 add_executable(calibrate
-  src/calibrate.cpp
+  ../src/calibrate.cpp
 )
 target_link_libraries(calibrate
     st_handeye_graph
