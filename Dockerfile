@@ -31,4 +31,5 @@ RUN ls -altrsh
 RUN cmake .. -DCMAKE_MODULE_PATH=/root/st_handeye_graph/cmake -DVISP_DIR=/root/visp-ws/visp-build/ -DCMAKE_BUILD_TYPE=Release && make -j4
 #RUN cmake .. -DVISP_DIR=/root/visp-ws/visp-build/ -DCMAKE_BUILD_TYPE=Release && make -j4
 #RUN cmake .. -DCMAKE_BUILD_TYPE=Release && make -j4
+RUN apt-get update && apt-get install -y fish
 CMD bash
