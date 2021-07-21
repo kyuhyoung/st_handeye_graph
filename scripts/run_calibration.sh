@@ -7,7 +7,9 @@ calib_test_dir="../../st_handeye_eval/calib_test"
 
 reconst_dir="../../st_handeye_eval/spirit_reconst"
 
-command="../build/calibrate -u"
+#command="../build/calibrate -u"
+command="../build/calibrate"
+#command="gdb --args ../build/calibrate -u"
 command="$command -c $camera_params"
 command="$command --visual_inf_scale 1e-6"
 command="$command --handpose_inf_scale_trans 1e-3"
@@ -22,7 +24,7 @@ command="$command --save_hand2eye_graph data/hand2eye_graph.csv"
 command="$command $calib_test_dir"
 
 $command
-
+#exit 100
 command="./reconst.py"
 command="$command -c $camera_params"
 command="$command data/hand2eye_visp.csv"
