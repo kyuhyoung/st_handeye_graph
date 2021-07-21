@@ -1,7 +1,7 @@
 # ssh 접속
 # gedit
 # 만약 gedit 창이 remote server에서 보여지면 아래를 실행하고 그렇지 않으면 보여질 때 까지 작업한다.
-# usage : $ sh docker_run_gui_mode_on_remote_server_from_local_server_with_option_1_container_name_and_tag_option_2_shared_dir.sh my_image:my_tag /path/to/shared_dir
+# usage : $ sh docker_run_gui_mode_on_remote_server_from_local_server_with_option_1_container_name_and_tag_option_2_shared_dir.sh my_image:my_tag /path/to/shared_dir_1 /path/to/shared_dir_2 ...... /path/to/shared_dir_N
 IMAGE_AND_TAG=$1
 
 SET=$(seq 2 $#)
