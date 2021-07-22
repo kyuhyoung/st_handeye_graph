@@ -7,8 +7,8 @@ calib_test_dir="../../st_handeye_eval/calib_test"
 
 reconst_dir="../../st_handeye_eval/spirit_reconst"
 
-#command="../build/calibrate -u"
-command="../build/calibrate"
+command="../build/calibrate -u"
+#command="../build/calibrate"
 #command="gdb --args ../build/calibrate -u"
 command="$command -c $camera_params"
 command="$command --visual_inf_scale 1e-6"

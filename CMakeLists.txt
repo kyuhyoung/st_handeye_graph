@@ -58,6 +58,17 @@ target_link_libraries(st_handeye_graph_xray
   ${G2O_TYPES_SLAM3D_ADDONS}
 )
 
+add_library(epnp
+  ../src/epnp.cpp
+)
+target_link_libraries(epnp
+#  ${Boost_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+#  ${VISP_LIBRARIES}
+)
+
+
+
 add_library(st_handeye_visp
   ../src/st_handeye_visp.cpp
 )
@@ -74,10 +85,12 @@ add_executable(handeye_simulation
 target_link_libraries(handeye_simulation
   st_handeye_graph
   st_handeye_visp
+  epnp
 )
 add_dependencies(handeye_simulation
   st_handeye_graph
   st_handeye_visp
+  epnp
 )
 
 # handeye_simulation_xray
@@ -98,8 +111,10 @@ add_executable(calibrate
 target_link_libraries(calibrate
     st_handeye_graph
     st_handeye_visp
+    epnp
 )
 add_dependencies(calibrate
   st_handeye_graph
   st_handeye_visp
+  epnp
 )

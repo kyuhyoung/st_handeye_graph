@@ -297,11 +297,13 @@ int main( int argc, char** argv )
     params.robust_kernel_projection = vm["robust_kernel_projection"].as<std::string>();
     params.robust_kernel_handpose_delta = vm["robust_kernel_handpose_delta"].as<double>();
     params.robust_kernel_projection_delta = vm["robust_kernel_projection_delta"].as<double>();
-#if 0
+#if 1
     std::cout << "calibrate_visp..." << std::endl;
     Eigen::Isometry3d hand2eye_visp = Eigen::Isometry3d::Identity();
     Eigen::Isometry3d object2world_visp = Eigen::Isometry3d::Identity();
     st_handeye::spatial_calibration_visp( dataset->camera_matrix, dataset->pattern_3d, world2hands, dataset->pattern_2ds, hand2eye_visp, object2world_visp, params );
+#endif  //  0
+#if 0
     std::cout << "calibrate_dq..." << std::endl;
     Eigen::Isometry3d hand2eye_dq = Eigen::Isometry3d::Identity();
     Eigen::Isometry3d object2world_dq = Eigen::Isometry3d::Identity();
@@ -313,26 +315,32 @@ int main( int argc, char** argv )
 
     if ( vm.count( "use_init_guess" ) )
     {
-#if 0
+#if 1
         hand2eye_graph = hand2eye_visp;
         object2world_graph = object2world_visp;
-//#else   //  0
+#else   //  0        
         hand2eye_graph = hand2eye_dq;
         object2world_graph = object2world_dq;
 #endif  //  0
     }
 
+    //std::cout << "dataset->camera_matrix : " << std::endl << dataset->camera_matrix << std::endl;
+    //std::cout << "dataset->pattern_3d.transpose() : " << std::endl << dataset->pattern_3d.transpose() << std::endl;
+    //std::cout << "world2hands : " << std::endl << world2hands << std::endl;
+    //exit(0);
+    std::cout << "--- hand2eye_graph b4 ---\n" << hand2eye_graph.matrix().inverse() << std::endl;
+    std::cout << "--- object2world_graph b4 ---\n" << object2world_graph.matrix().inverse() << std::endl;
     st_handeye::spatial_calibration_graph( dataset->camera_matrix, dataset->pattern_3d, world2hands, dataset->pattern_2ds, hand2eye_graph, object2world_graph, params );
 #if 0
     std::cout << "--- hand2eye_visp ---\n" << hand2eye_visp.matrix().inverse() << std::endl;
     std::cout << "--- hand2eye_dq ---\n" << hand2eye_dq.matrix().inverse() << std::endl;
 #endif  //  0    
-    std::cout << "--- hand2eye_graph ---\n" << hand2eye_graph.matrix().inverse() << std::endl;
+    std::cout << "--- hand2eye_graph after ---\n" << hand2eye_graph.matrix().inverse() << std::endl;
 #if 0
     std::cout << "--- object2world_visp ---\n" << object2world_visp.matrix().inverse() << std::endl;
     std::cout << "--- object2world_dq ---\n" << object2world_dq.matrix().inverse() << std::endl;
 #endif  //  0      
-    std::cout << "--- object2world_graph ---\n" << object2world_graph.matrix().inverse() << std::endl;
+    std::cout << "--- object2world_graph after ---\n" << object2world_graph.matrix().inverse() << std::endl;
 #if 0
 
     if ( vm.count( "save_hand2eye_visp" ) )

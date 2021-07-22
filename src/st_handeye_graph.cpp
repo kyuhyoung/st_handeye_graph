@@ -144,11 +144,12 @@ namespace st_handeye
                 std::cout << "optimizing..." << std::endl;
                 int max_iterations = params.num_iterations;
                 graph->initializeOptimization();
-                graph->setVerbose( false );
+                //graph->setVerbose(false);
+                graph->setVerbose( true );
                 double chi2 = graph->chi2();
                 int iterations = graph->optimize( max_iterations );
                 std::cout << "iterations: " << iterations << "/" << max_iterations << std::endl;
-                std::cout << "chi2: (before)" << chi2 << " -> (after)" << graph->chi2() << std::endl;
+                std::cout << "chi2: (before) " << chi2 << " -> (after) " << graph->chi2() << std::endl;
                 hand2eye = hand2eye_vertex->estimate();
                 object2world = object2world_vertex->estimate();
                 return true;
